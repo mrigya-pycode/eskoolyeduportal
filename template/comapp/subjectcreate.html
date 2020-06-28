@@ -1,0 +1,23 @@
+{% extends 'comapp/base.html' %}
+
+{% block body_block %}
+
+
+<center>
+<div class = "container">
+<h1>list</h1>
+<br>
+{% for j in classes %}
+<h2>{{j.class_name}}</h2>
+{% for k in j.subjects_set.all %}
+<ul>
+<li>subject name : {{k.subject_name}}</li>
+<li>weightage : {{k.subject_weightage}}</li>
+</ul>
+<a href="/Updatesub/{{k.id}}">EDIT</a>
+{% endfor %}
+<a href="/subadd">ADD</a>
+
+{% endfor %}
+</center>
+{% endblock %}

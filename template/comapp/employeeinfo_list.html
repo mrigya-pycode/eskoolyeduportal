@@ -1,0 +1,25 @@
+{% extends 'comapp/base.html' %}
+<div class = "container">
+{% block body_block %}
+
+
+
+{% if Employeeinfo_list %}
+{% for i in Employeeinfo_list %}
+
+<center>
+<table>
+  <td>{{i.emp_id}}</td>
+  <br>
+  <td>{{i.emp_type}}</td>
+  <br>
+<td><a href="/Updateemp/{{i.id}}">update</a></td>
+<td><a href="/Deleteemp/{{i.id}}">delete</a></td>
+</table>
+</center>
+</div>
+{% endfor %}
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script><meta charset="UTF-8">
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #402014;
+  line-height: 1.8;
+  background-color: coral;
+}
+
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: scroll;
+    min-height: 400px;
+  }
+}
+</style>
+
+
+  <body>
+
+    <div class="w3-top">
+      <div class="w3-bar" id="myNavbar">
+        <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+          <i class="fa fa-bars"></i>
+        </a>
+{% if request.user.is_authenticated is True %}
+        <a href="#" class="w3-bar-item w3-button">welcome {{request.user}}</a>
+        <a href="/logout" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> LOGOUT</a>
+{% else %}
+        <a href="/" class="w3-bar-item w3-button">HOME</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> SIGNUP</a>
+        <a href="/login" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> LOGIN</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+          <i class="fa fa-search"></i>
+        </a>
+{% endif %}
+      </div>
+
+{% if request.user.is_superuser %}
+      <div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:30%">
+        <a href="#" class="w3-bar-item w3-button">DASHBOARD</a>
+        <a href="/instituteinfopage/1" class="w3-bar-item w3-button">INSTITUTE INFO</a>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">CLASSES
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="/classview" class="w3-bar-item w3-button">All classes</a>
+            <a href="/Create" class="w3-bar-item w3-button">new classes</a>
+            <a href="/classview" class="w3-bar-item w3-button">edit and delete</a>
+            <a href="/subCreate" class="w3-bar-item w3-button">subjects to classes</a>
+            <a href="/subadd" class="w3-bar-item w3-button">add subjects</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">STUDENTS
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="/allstudents" class="w3-bar-item w3-button">all students</a>
+            <a href="/Studentcreateview" class="w3-bar-item w3-button">new student/Adminssion</a>
+            <a href="/allstudents" class="w3-bar-item w3-button">Edit/Delete a Student</a>
+            <a href="#" class="w3-bar-item w3-button">Admission Letter</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">EMPLOYEES
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="/empview" class="w3-bar-item w3-button">all employees</a>
+            <a href="/empcreate" class="w3-bar-item w3-button">New employee</a>
+            <a href="/empview" class="w3-bar-item w3-button">Edit/Delete a employee</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">ACCOUNTS
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">ATTENDENCE
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">FEES
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">EXAMS
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">CLASS TESTS
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">CERTIFICATES
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+          </div>
+        </div>
+
+       <a href="#" class="w3-bar-item w3-button">SALARY</a>
+{% endif %}
+      </div>
+
+
+
+
+    <main>
+        {% block body_block %}
+        <div style="margin-left:500px">
+        <div style="padding-left: :100px">
+        <div class="w3-container">
+          </div>
+          </div>
+
+        {% endblock %}
+    </main>
+
+  </body>
+</html>

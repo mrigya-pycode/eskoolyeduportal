@@ -1,0 +1,28 @@
+{% extends 'comapp/base.html' %}
+
+{% block body_block %}
+
+
+<!-- <h1> INSERT AND DELETE</h1> -->
+<center>
+<div class = "container">
+  <center><form method = "post">
+    {% csrf_token %}
+    NAME=            {{form.emp_name}}<br><br>
+    ID NO.=          {{form.emp_id}}<br><br>
+    EMPLOYEE PHOTO=  {{form.emp_profile}}<br><br>
+    JOINING DATA=    {{form.emp_joiningdate}}<br><br>
+    DOB=             {{form.emp_dob}}<br><br>
+    MOBILE NO. =     {{form.emp_mobileno}}<br><br>
+    SALARY=          {{form.emp_salary}}<br><br>
+    GENDER=          {{form.emp_gender}}<br><br>
+    RELIGION=        {{form.emp_rligion}}<br><br>
+    ADDRESS=           {{form.emp_address}}<br><br>
+
+    <input type = "submit" value ="save"  class="btn btn-success">
+    </form>
+    </center>
+</div>
+</center>
+
+{% endblock %}

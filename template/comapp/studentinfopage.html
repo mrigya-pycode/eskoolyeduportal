@@ -1,0 +1,44 @@
+{% extends 'comapp/base.html' %}
+
+{% block body_block %}
+
+<!-- {% load static %} -->
+
+<script src="https://use.fontawesome.com/0a087d3bc2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<style media="screen">
+
+
+tr{
+ display:inline
+
+}
+
+
+</style>
+<center>
+<div class="main">
+  <div class="container col-lg-12">
+    <table>
+
+      {% for i in Studentsinfo %}
+        <tr>
+          <td>
+
+          <!-- <img src = "{% static "images/student.png"%}" width = "100px" height="100px"><br> -->
+
+          {{i.stu_regno}}  | {{i.stu_name}}
+          <br>
+          <center><a href="/studentsdetail/{{i.id}}"><i class="fa fa-search" aria-hidden="true">any details</i><br>
+          <a href="/updatestudents/{{i.id}}"><i class="fa fa-pencil" aria-hidden="true">update</i></a><br>
+          <a href="/deletestudents/{{i.id}}"><i class="fa fa-times" aria-hidden="true">delete</i></a></center><br>
+        </td>
+
+          </tr>
+      {% endfor %}
+  </table>
+
+</div>
+</center>
+{% endblock %}
