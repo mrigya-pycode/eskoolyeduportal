@@ -124,3 +124,18 @@ class Employeeinfo(models.Model):
 
     def __str__(self):
         return self.emp_name
+
+class Accountinfo(models.Model):
+    from_date = models.DateField(null=True, blank=True, default = "")
+    to_date = models.DateField(null=True, blank=True, default = "")
+
+
+class Incomeinfo(models.Model):
+    from_date = models.DateField(null=True, blank=True, default = "")
+    income_des = models.CharField(max_length = 30, default = "")
+    income_ammount = models.IntegerField(default = "")
+
+class expenseinfo(models.Model):
+    from_date = models.DateField(null=True, blank=True, default = "")
+    expense_des = models.CharField(max_length = 30, default = "")
+    expense_ammount = models.IntegerField(default = "")

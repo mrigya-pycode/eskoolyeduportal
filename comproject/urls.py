@@ -40,7 +40,8 @@ urlpatterns = [
     path('empcreate/',views.Employeecreateview.as_view()),
     path('Deleteemp/<pk>',views.employeedelete.as_view()),
     path('Updateemp/<pk>',views.employeeupdate.as_view()),
-
-    # path('',views..as_view()),
+    path('acccreate/',views.Accountcreateview.as_view()),    # path('',views..as_view()),
+    path('incomecreate/',views.Incomecreateview.as_view()),
+    path('expensecreate/',views.Expensecreateview.as_view()), 
 
 ]

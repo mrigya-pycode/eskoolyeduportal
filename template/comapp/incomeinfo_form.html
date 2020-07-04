@@ -1,0 +1,28 @@
+{% extends 'comapp/base.html' %}
+
+{% block body_block %}
+
+
+<!-- <h1> INSERT AND DELETE</h1> -->
+<center>
+  <h1>Add Income:</h1>
+  <br>
+  <br>
+  <br>
+  <br>
+<div class = "container">
+  <center><form method = "post">
+    {% csrf_token %}
+  DATE =        {{form.from_date}}
+  <br>
+  <br><br>
+  DESCRIPTION = {{form.income_des}}
+  AMOUNT =      {{form.income_ammount}}
+
+    <input type = "submit" value ="statement"  class="btn btn-success">
+    </form>
+    </center>
+</div>
+</center>
+
+{% endblock %}

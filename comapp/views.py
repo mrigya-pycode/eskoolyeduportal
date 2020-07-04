@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from comapp.models import classes,subjects,instituteinfo,Studentsinfo,Employeeinfo
+from comapp.models import classes,subjects,instituteinfo,Studentsinfo,Employeeinfo,Accountinfo,Incomeinfo,expenseinfo
 from comapp.forms import instituteinfoform,rulesform,pfeesform,Employeeinfoform
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
@@ -184,3 +184,25 @@ class employeedelete(DeleteView):
     model = Employeeinfo
     def get_success_url(self):
         return reverse("empview")
+
+
+class Accountcreateview(CreateView):
+    model = Accountinfo
+    fields='__all__'
+
+    def get_success_url(self):
+        return reverse("accview")
+
+class Incomecreateview(CreateView):
+    model = Incomeinfo
+    fields='__all__'
+
+    def get_success_url(self):
+        return reverse("accview")
+
+class Expensecreateview(CreateView):
+    model = expenseinfo
+    fields='__all__'
+
+    def get_success_url(self):
+        return reverse("accview")
