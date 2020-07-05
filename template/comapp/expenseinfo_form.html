@@ -10,18 +10,14 @@
   <br>
   <br>
   <br>
-<div class = "container">
-  <center><form method = "post">
-    {% csrf_token %}
-  DATE =        {{form.from_date}}
-  <br>
-  <br>
-  <br>
-  DESCRIPTION = {{form.expense_des}}
-  AMOUNT =      {{form.expense_ammount}}
-
-    <input type = "submit" value ="statement"  class="btn btn-success">
-    </form>
+  <div class="content" style="text-align:center;">
+<form method="POST">
+  {% csrf_token %}
+<input type="date" name="expensedate" required>
+<input type="text" name="expensedes" placeholder="Expense Description" required>
+<input type="number" name="expenseamt" placeholder="Expense Amount" required><br>
+<button type="submit" name="addexpense" class="submit btn btn-danger btn-lg" style="margin:20px;width:220px;">Submit</button>
+</form>
     </center>
 </div>
 </center>

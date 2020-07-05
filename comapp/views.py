@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from comapp.models import classes,subjects,instituteinfo,Studentsinfo,Employeeinfo,Accountinfo,Incomeinfo,expenseinfo
-from comapp.forms import instituteinfoform,rulesform,pfeesform,Employeeinfoform
+from comapp.models import classes,subjects,instituteinfo,Studentsinfo,Employeeinfo,Accountinfo,Incomeinfo,Expenseinfo
+from comapp.forms import instituteinfoform,rulesform,pfeesform,Employeeinfoform,accountinfoform
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate,login,logout
@@ -186,23 +186,29 @@ class employeedelete(DeleteView):
         return reverse("empview")
 
 
-class Accountcreateview(CreateView):
-    model = Accountinfo
-    fields='__all__'
-
-    def get_success_url(self):
-        return reverse("accview")
+def accountinfopage(request,id):
+     obj = get_object_or_404(Accountinfo,id=id)
+     info = Accountinfo.objects.all()
+     list1=accountinfoform();
+     mdict1={'list1':list1,'info':info}
+     if request.method == 'POST':
+         list1=accountinfoform(request.POST,request.FILES, instance = obj);
+         if list1.is_valid():
+             obj=list1.save()
+             obj.save()
+             mydict1 = {'list1':list1,'info':info}
+     return render(request,'comapp/accountinfopage.html',context=mdict1);
 
 class Incomecreateview(CreateView):
     model = Incomeinfo
     fields='__all__'
 
     def get_success_url(self):
-        return reverse("accview")
+        return reverse("comapp/accountinfopage.html")
 
 class Expensecreateview(CreateView):
-    model = expenseinfo
+    model = Expenseinfo
     fields='__all__'
 
     def get_success_url(self):
-        return reverse("accview")
+        return reverse("comapp/accountinfopage.html")

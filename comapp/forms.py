@@ -1,5 +1,5 @@
 from django import forms
-from .models import instituteinfo,Employeeinfo
+from .models import instituteinfo,Employeeinfo,Accountinfo
 countrys = (
     ('india', 'china'),
     ('japan', 'uk'),
@@ -29,3 +29,8 @@ class Employeeinfoform(forms.ModelForm):
     class Meta:
         model=Employeeinfo
         fields=['emp_id','emp_type']
+
+class accountinfoform(forms.ModelForm):
+    class Meta:
+        model=Accountinfo
+        fields=["from_date","income_des","income_ammount","expense_ammount"]
