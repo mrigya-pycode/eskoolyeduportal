@@ -1,0 +1,50 @@
+{% extends 'comapp/base.html' %}
+
+{% block body_block %}
+
+<!-- <h1> INSERT AND DELETE</h1> -->
+<center>
+<div class = "container">
+
+  <center><form method = "post",enctype="multipart/form-data">
+    {% csrf_token %}
+FROM = <input type="date"required>
+  TO = <input type="date" required>
+
+	<button type="submit" name="searchid" class="btn btn-success" style="margin:0px;"><i class="icon-search"></i> Statement</button>
+    </form>
+    </center>
+</div>
+<br><br><br><br>
+
+
+<div class="container col-lg-4">
+  <center>
+    <form method="post",enctype="multipart/form-data">
+      {% csrf_token %}
+    {% if data %}
+    <table class="table table-dark table-hover">
+      <thead>
+ <tr>
+   <th>DATE</th><th>DESCIPTION</th><th>DEBT</th><th>CREDIT</th><th>NET BALANCE</th>
+   <tr>
+     {% for d in data %}
+    <td>{{d.date}}</td>
+    <td>{{d.desc}}</td>
+    <td>{{d.expense_ammount}}</td>
+    <td>{{d.income_ammount}}</td>
+    <td>{{d.total}}</td>
+
+    </tr>
+    </thead>
+    {%endfor%}
+
+<tr style="font-size:12px;"><td></td><td><b>Total</b></td><td><b  style="color:#3377cc;">{{debit}}</b></td><td><b style="color:#3377cc;">{{credit}}</b></td><td><b  style="color:#3377cc;">= {{total}}</b></td></tr>
+</table>
+
+    {%endif%}
+     </form>
+  </center>
+</center>
+
+{% endblock %}

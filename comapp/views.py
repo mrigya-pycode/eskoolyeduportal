@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from comapp.models import classes,subjects,instituteinfo,Studentsinfo,Employeeinfo,Accountinfo,Incomeinfo,Expenseinfo
-from comapp.forms import instituteinfoform,rulesform,pfeesform,Employeeinfoform,accountinfoform
+from comapp.models import classes,subjects,instituteinfo,Studentsinfo,Employeeinfo,Accountinfo
+from comapp.forms import instituteinfoform,rulesform,pfeesform,Employeeinfoform
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate,login,logout
@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View,TemplateView,ListView,DetailView,CreateView,UpdateView,DeleteView
-
+from django.db.models import Avg, Max, Min, Sum
 
 
 # Create your views here.
@@ -186,29 +186,42 @@ class employeedelete(DeleteView):
         return reverse("empview")
 
 
-def accountinfopage(request,id):
-     obj = get_object_or_404(Accountinfo,id=id)
-     info = Accountinfo.objects.all()
-     list1=accountinfoform();
-     mdict1={'list1':list1,'info':info}
-     if request.method == 'POST':
-         list1=accountinfoform(request.POST,request.FILES, instance = obj);
-         if list1.is_valid():
-             obj=list1.save()
-             obj.save()
-             mydict1 = {'list1':list1,'info':info}
-     return render(request,'comapp/accountinfopage.html',context=mdict1);
+# def accountinfopage(request):
+#      obj1 = Accountinfo.objects.all()
+#      obj2 = Accountinfo.objects.aggregate(DEBT=Sum("expense_ammount"))
+#      obj3 = Accountinfo.objects.aggregate(CREDIT=Sum("income_ammount"))
+# ---  obj4 = Accountinfo.objects.aggregate()
+#         mdict1={'obj1':obj1,'obj2':obj2,"obj3":obj3,"obj4":obj4}
+#      return render(request,'comapp/accountinfopage.html',context=mdict1);
+
+def Account_list(request):
+    data = Accountinfo.objects.all()
+    credit = 0
+    debit = 0
+    if data:
+        for i in data:
+            credit+= i.income_ammount
+            debit+= i.expense_ammount
+    context = {'data':data,'credit':credit,'debit':debit,'total':credit-debit}
+    return render(request,'comapp/accountinfo_list.html',context)
+
+
 
 class Incomecreateview(CreateView):
-    model = Incomeinfo
-    fields='__all__'
-
+    model = Accountinfo
+    fields=('date','income_ammount','desc')
+    def form_valid(self,form):
+        form.instance.expense_ammount=0
+        return super(Incomecreateview,self).form_valid(form)
     def get_success_url(self):
-        return reverse("comapp/accountinfopage.html")
+        return reverse("accountview")
 
 class Expensecreateview(CreateView):
-    model = Expenseinfo
-    fields='__all__'
+    model = Accountinfo
+    fields=('date','expense_ammount','desc')
+    def form_valid(self,form):
+        form.instance.income_ammount=0
+        return super(Expensecreateview,self).form_valid(form)
 
     def get_success_url(self):
-        return reverse("comapp/accountinfopage.html")
+        return reverse("accountview")

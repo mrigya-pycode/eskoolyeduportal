@@ -126,18 +126,15 @@ class Employeeinfo(models.Model):
         return self.emp_name
 
 class Accountinfo(models.Model):
-    from_date = models.DateField(null=True, blank=True, default = "")
-    to_date = models.DateField(null=True, blank=True, default = "")
-    income_des = models.CharField(max_length = 30, default = "")
+    date = models.DateField(null=True, blank=True, default = "")
     income_ammount = models.IntegerField(default = "")
-    expense_des = models.CharField(max_length = 30, default = "")
+    desc = models.CharField(max_length = 200, default = "")
     expense_ammount = models.IntegerField(default = "")
-    net_balance = models.IntegerField(default = "")
-class Incomeinfo(models.Model):
-    from_date = models.DateField(null=True, blank=True, default = "")
-    income_des = models.CharField(max_length = 30, default = "")
-    income_ammount = models.IntegerField(default = "")
-class Expenseinfo(models.Model):
-    from_date = models.DateField(null=True, blank=True, default = "")
-    expense_des = models.CharField(max_length = 30, default = "")
-    expense_ammount = models.IntegerField(default = "")
+# class Incomeinfo(models.Model):
+#     from_date = models.DateField(null=True, blank=True, default = "")
+#     income_des = models.CharField(max_length = 30, default = "")
+#     income_ammount = models.IntegerField(default = "")
+# class Expenseinfo(models.Model):
+#     from_date = models.DateField(null=True, blank=True, default = "")
+#     expense_des = models.CharField(max_length = 30, default = "")
+#     expense_ammount = models.IntegerField(default = "")

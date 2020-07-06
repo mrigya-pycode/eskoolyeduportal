@@ -29,8 +29,3 @@ class Employeeinfoform(forms.ModelForm):
     class Meta:
         model=Employeeinfo
         fields=['emp_id','emp_type']
-
-class accountinfoform(forms.ModelForm):
-    class Meta:
-        model=Accountinfo
-        fields=["from_date","income_des","income_ammount","expense_ammount"]
